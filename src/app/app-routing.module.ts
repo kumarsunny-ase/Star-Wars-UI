@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './search/search.component';
-import { TitleDetailsComponent } from './title-details/title-details.component';
 import { ShowDetailsComponent } from './show-details/show-details.component';
 
 const routes: Routes = [
@@ -12,10 +11,6 @@ const routes: Routes = [
   {
     path: 'admin/search',
     component: SearchComponent,
-  },
-  {
-    path: 'title-details/:filmId',
-    component: TitleDetailsComponent,
   },
   {
     path: 'film/details',
