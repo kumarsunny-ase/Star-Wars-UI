@@ -14,7 +14,10 @@ export class SearchComponent {
   constructor(private apiService: ApiService) {}
 
   async search(): Promise<void> {
-    console.log(this.query)
+    if(this.query == '')
+    {
+      return;
+    }
     if (this.resourceType === 'people') {
       const data = await this.apiService.searchPeople(this.query).toPromise();
       this.results = data.results;

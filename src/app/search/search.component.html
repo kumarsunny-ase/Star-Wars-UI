@@ -35,18 +35,15 @@
         <div class="d-flex gap-5">
           <div class="form-check">
             <input
-              class="form-check-input"
+              class="form-check-input border-black"
               type="radio"
               name="gridRadios"
               id="gridRadios1"
               value="people"
               checked
-              [(ngModel)]="resourceType" 
-
+              [(ngModel)]="resourceType"
             />
-            <label class="form-check-label" for="gridRadios1">
-              People
-            </label>
+            <label class="form-check-label" for="gridRadios1"> People </label>
           </div>
           <div class="form-check">
             <input
@@ -54,12 +51,10 @@
               type="radio"
               name="gridRadios"
               id="gridRadios2"
-              [(ngModel)]="resourceType" 
+              [(ngModel)]="resourceType"
               value="films"
             />
-            <label class="form-check-label" for="gridRadios2">
-              Films
-            </label>
+            <label class="form-check-label" for="gridRadios2"> Films </label>
           </div>
         </div>
       </div>
@@ -69,7 +64,12 @@
     <div class="form-group row">
       <div class="col-sm-4"></div>
       <div class="col-sm-8">
-        <button type="submit" class="btn btn-primary" (click)="search()">
+        <button
+          type="submit"
+          [disabled]="!this.query.length"
+          class="btn btn-primary"
+          (click)="search()"
+        >
           Search
         </button>
       </div>
@@ -78,7 +78,7 @@
 </div>
 
 <div *ngIf="resourceType === 'people'" class="mt-5 mx-auto w-50">
-  <table *ngIf="results.length > 0" class="table">
+  <table *ngIf="results.length > 0" class="table border border-3">
     <thead class="table-dark">
       <tr>
         <th scope="col">Person Name</th>
@@ -89,12 +89,13 @@
       <tr *ngFor="let result of results">
         <td>{{ result.name }}</td>
         <td>
-          <ul>
+          <ul class="li">
             <li *ngFor="let movie of result.movies">
               <a
                 href="#"
                 [routerLink]="['film/details']"
                 [queryParams]="{ url: movie.url }"
+                class="text-decoration-none"
                 >{{ movie.title }}</a
               >
             </li>
@@ -105,10 +106,12 @@
   </table>
   <div *ngIf="results.length === 0 && query != ''">No results found.</div>
 </div>
-
-<div *ngFor="let result of results">
-  <p *ngIf="resourceType === 'films'">Film Title: {{ result.title }}</p>
-  <p *ngIf="resourceType === 'films'">Director Name: {{ result.director }}</p>
+<div *ngIf="results.length && results[0].title">
+  <div *ngFor="let result of results">
+    <p *ngIf="resourceType === 'films'">Film Title: {{ result.title }}</p>
+    <p *ngIf="resourceType === 'films'">Director Name: {{ result.director }}</p>
+  </div>
 </div>
+
 <app-search-history [resourceType]="resourceType"></app-search-history>
 <!-- </div> -->
