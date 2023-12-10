@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 import { searchHistory } from '../Models/search-history';
 import { ApiService } from '../Service/api.service';
 
@@ -8,7 +8,7 @@ import { ApiService } from '../Service/api.service';
   styleUrls: ['./search-history.component.css'],
 })
 export class SearchHistoryComponent {
-  @Input() resourceType : string;
+  @Input() resourceType: string;
   searchHistories: searchHistory[] = [];
   histories: any = [];
 
@@ -17,19 +17,26 @@ export class SearchHistoryComponent {
   }
 
   ngOnInit(): void {
-    this.apiService.fetchSearchHistory().subscribe((response) => {
-      // console.log(results);
-      // console.log(
-      //   response.history.map((result: any) => ({
-      //     keyword: result.keyword,
-      //     results: JSON.parse(result.result),
-      //   }))
-      // );
-      this.histories = response.history.map((history: any) => ({
-        keyword: history.keyword,
-        results: JSON.parse(history.result),
-        type: history.type,
-      }));
-    });
+    this.fetchSearchHistory();
+  }
+
+  ngOnChanges(changes: SimpleChange) {
+    for (let propName in changes) {
+      if (propName === 'resourceType') {
+        this.fetchSearchHistory();
+      }
+    }
+  }
+
+  fetchSearchHistory() {
+    this.apiService
+      .fetchSearchHistory(this.resourceType)
+      .subscribe((response) => {
+        this.histories = response.history.map((history: any) => ({
+          keyword: history.keyword,
+          results: JSON.parse(history.result),
+          type: history.type,
+        }));
+      });
   }
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin } from 'rxjs';
-import { Person } from '../Models/Person';
 
 @Injectable({
   providedIn: 'root',
@@ -48,9 +47,9 @@ export class ApiService {
     return this.http.post<any>(backendUrl, payload);
   }
 
-  fetchSearchHistory(): Observable<any> {
+  fetchSearchHistory(resourceType: string): Observable<any> {
     const backendUrl = 'https://localhost:7118/search/history';
-    return this.http.get<any>(backendUrl);
+    return this.http.get<any>(`${backendUrl}?resourceType=${resourceType}`);
   }
 
   postSearchHistory(payload: {
