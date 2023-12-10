@@ -10,12 +10,12 @@ export class SearchComponent {
   query: string = '';
   resourceType: string = 'people';
   results: any[] = [];
+  isSearchComplete = false;
 
   constructor(private apiService: ApiService) {}
 
   async search(): Promise<void> {
-    if(this.query == '')
-    {
+    if (this.query == '') {
       return;
     }
     if (this.resourceType === 'people') {
@@ -23,12 +23,8 @@ export class SearchComponent {
       this.results = data.results;
 
       await this.fetchMovies();
+      this.isSearchComplete = true;
       await this.saveHistory();
-      // this.apiService.searchPeople(this.query).subscribe((data) => {
-      //   this.results = data.results;
-      //   // Fetch corresponding movie titles
-      //   this.fetchMovies();
-      // });
     } else if (this.resourceType === 'films') {
       const data = await this.apiService.searchFilms(this.query).toPromise();
 
@@ -43,19 +39,18 @@ export class SearchComponent {
       person.movies = [];
       for (const filmUrl of person.films) {
         const data = await this.apiService.getFilmTitle(filmUrl).toPromise();
-
         person.movies.push({ title: data.title, url: data.url });
+        console.log(this.results);
+
+        
       }
     }
   }
 
   saveHistory(): void {
-    // console.log('first', persons.length);
     const results: any[] = [];
-    if (this.results[0].movies) {
+    if (this.results[0] && this.results[0].movies) {
       for (const person of this.results) {
-        console.log(person.movies.length);
-
         results.push({ name: person.name, movies: person.movies });
       }
     } else {

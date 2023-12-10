@@ -104,7 +104,7 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="results.length === 0 && query != ''">No results found.</div>
+  <div *ngIf="results.length === 0 && isSearchComplete"><h4>No results found!</h4></div>
 </div>
 <div *ngIf="results.length && results[0].title">
   <div *ngFor="let result of results">
