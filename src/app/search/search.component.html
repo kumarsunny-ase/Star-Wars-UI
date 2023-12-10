@@ -1,0 +1,50 @@
+<div class="container">
+  <div>
+    <input [(ngModel)]="query" placeholder="Enter a name" />
+    <label>
+      <input type="radio" [(ngModel)]="resourceType" value="people" /> People
+    </label>
+    <label>
+      <input type="radio" [(ngModel)]="resourceType" value="films" /> Films
+    </label>
+    <button (click)="search()">Search</button>
+  </div>
+
+  <div *ngIf="resourceType === 'people'">
+    <table *ngIf="results.length > 0">
+      <thead>
+        <tr>
+          <th>Person Name</th>
+          <th>Movie Titles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results">
+          <td>{{ result.name }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let movie of result.movies">
+                <a
+                  href="#"
+                  [routerLink]="['film/details']"
+                  [queryParams]="{ url: movie.url }"
+                  >{{ movie.title }}</a
+                >
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="results.length === 0">No results found.</div>
+  </div>
+
+  
+  <div *ngFor="let result of results">
+    <p *ngIf="resourceType === 'films'">Film Title: {{ result.title }}</p>
+    <p *ngIf="resourceType === 'films'">
+      Director Name: {{ result.director }}
+    </p>
+  </div>
+  <app-search-history [resourceType]="resourceType" ></app-search-history>
+</div>

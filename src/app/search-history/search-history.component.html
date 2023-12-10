@@ -1,0 +1,63 @@
+<div>
+  <h1>Search History</h1>
+  <table *ngIf="histories.length > 0">
+    <thead>
+      <tr>
+        <th>Keyword</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let history of histories">
+        <!-- For people -->
+        <td *ngIf="resourceType === 'people'">{{ history.keyword }}</td>
+        <td *ngIf="resourceType === 'people'">
+          <table *ngIf="history.results.length > 0">
+            <thead>
+              <tr>
+                <th>Person</th>
+                <th>Movies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let person of history.results">
+                <td>{{ person.name }}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let movie of person.movies">
+                      <a
+                        href="#"
+                        [routerLink]="['film/details']"
+                        [queryParams]="{ url: movie.url }"
+                        >{{ movie.title }}</a
+                      >
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+
+        <!-- For Films -->
+        <td *ngIf="resourceType === 'films'">{{ history.keyword }}</td>
+        <td *ngIf="resourceType === 'films'">
+          <table *ngIf="history.results.length > 0">
+            <thead>
+              <tr>
+                <th>Film Title</th>
+                <th>Director Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let film of history.results">
+                <td>{{ film.title }}</td>
+                <td>{{ film.director }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

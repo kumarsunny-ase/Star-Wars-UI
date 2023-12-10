@@ -1,0 +1,39 @@
+/* Style for the overall container */
+.container {
+  margin: 20px;
+}
+
+/* Style for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Style for table headers */
+th {
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style for table rows */
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style for table data cells */
+td {
+  padding: 8px;
+}
+
+/* Style for alternate table rows */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Style for no results message */
+.no-results {
+  color: #666;
+  margin-top: 10px;
+}
