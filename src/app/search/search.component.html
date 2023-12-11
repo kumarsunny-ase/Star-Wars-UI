@@ -106,11 +106,25 @@
   </table>
   <div *ngIf="results.length === 0 && isSearchComplete"><h4>No results found!</h4></div>
 </div>
-<div *ngIf="results.length && results[0].title">
-  <div *ngFor="let result of results">
+<div *ngIf="results.length && results[0].title" class="mt-5 mx-auto w-50">
+  <!-- <div *ngFor="let result of results">
     <p *ngIf="resourceType === 'films'">Film Title: {{ result.title }}</p>
     <p *ngIf="resourceType === 'films'">Director Name: {{ result.director }}</p>
-  </div>
+  </div> -->
+  <table *ngIf="resourceType === 'films'" class="table border border-3">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Film Title</th>
+        <th scope="col">Director Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{result.title}}</td>
+        <td>{{result.director}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <app-search-history [resourceType]="resourceType"></app-search-history>
