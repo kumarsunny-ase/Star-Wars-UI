@@ -1,22 +1,33 @@
 <div class="mt-5 mx-auto w-50">
   <h1 class="mt-5 mx-auto w-50">Search History</h1>
-  <table *ngIf="histories.length > 0" class="table table-hover table-striped-columns border border-3 " >
+  <table
+    *ngIf="histories.length > 0"
+    class="table table-hover table-striped-columns border border-3"
+  >
     <thead class="table-dark">
       <tr>
-        <th >Keyword</th>
-        <th >Result</th>
+        <th>Keyword</th>
+        <th>Result</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let history of histories">
         <!-- For people -->
-        <td *ngIf="resourceType === history.type && history.type === 'people'" class="keyword">{{ history.keyword }}</td>
+        <td
+          *ngIf="resourceType === history.type && history.type === 'people'"
+          class="keyword"
+        >
+          {{ history.keyword }}
+        </td>
         <td *ngIf="resourceType === history.type && history.type === 'people'">
-          <table *ngIf="history.results.length > 0" class="table  table-striped-columns">
+          <table
+            *ngIf="history.results.length > 0"
+            class="table table-striped-columns"
+          >
             <thead>
               <tr>
-                <th >Person</th>
-                <th class="mt-5 mx-auto w-50">Movies</th>
+                <th>Person</th>
+                <th class="mt-5 mx-auto w-50">Movie Title</th>
               </tr>
             </thead>
             <tbody>
@@ -24,12 +35,13 @@
                 <td>{{ person.name }}</td>
                 <td>
                   <ul class="li">
-                    <li *ngFor="let movie of person.movies" >
+                    <li *ngFor="let movie of person.movies">
                       <a
                         href="#"
                         [routerLink]="['film/details']"
                         [queryParams]="{ url: movie.url }"
-                       class="text-decoration-none" >{{ movie.title }}</a
+                        class="text-decoration-none"
+                        >{{ movie.title }}</a
                       >
                     </li>
                   </ul>
@@ -40,7 +52,9 @@
         </td>
 
         <!-- For Films -->
-        <td *ngIf="resourceType === history.type && history.type === 'films'">{{ history.keyword }}</td>
+        <td *ngIf="resourceType === history.type && history.type === 'films'">
+          {{ history.keyword }}
+        </td>
         <td *ngIf="resourceType === history.type && history.type === 'films'">
           <table *ngIf="history.results.length > 0">
             <thead>
