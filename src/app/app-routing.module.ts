@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './search/search.component';
 import { ShowDetailsComponent } from './show-details/show-details.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchComponent
+    component: LoginComponent
   },
   {
     path: 'admin/search',
@@ -16,6 +18,14 @@ const routes: Routes = [
     path: 'film/details',
     component: ShowDetailsComponent
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  }
 ];
 
 @NgModule({

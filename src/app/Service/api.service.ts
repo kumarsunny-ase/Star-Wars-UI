@@ -32,14 +32,14 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  getDirectorName(url: string): Observable<any> {
-    console.log(url);
-    return this.http.get(url);
-  }
+  // getDirectorName(url: string): Observable<any> {
+  //   console.log(url);
+  //   return this.http.get(url);
+  // }
 
-  getPerson(url: string): Observable<any> {
-    return this.http.get<any>(url);
-  }
+  // getPerson(url: string): Observable<any> {
+  //   return this.http.get<any>(url);
+  // }
 
   fetchExpensiveData(movieUrl: string): Observable<any> {
     const backendUrl = 'https://localhost:7118/api/films';
@@ -55,10 +55,19 @@ export class ApiService {
   postSearchHistory(payload: {
     keyword: string;
     result: string;
-    type: string
+    type: string;
   }): Observable<any> {
     console.log(payload);
     const backendUrl = 'https://localhost:7118/search/history';
     return this.http.post<any>(backendUrl, payload);
+  }
+
+  login(userObj: any) {
+    const backendUrl = 'https://localhost:7118/Authenticate';
+    return this.http.post<any>(`${backendUrl}`, userObj);
+  }
+  signUp(userObj: any) {
+    const backendUrl = 'https://localhost:7118/register';
+    return this.http.post<any>(`${backendUrl}`, userObj);
   }
 }

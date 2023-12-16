@@ -40,9 +40,7 @@ export class SearchComponent {
       for (const filmUrl of person.films) {
         const data = await this.apiService.getFilmTitle(filmUrl).toPromise();
         person.movies.push({ title: data.title, url: data.url });
-        console.log(this.results);
-
-        
+        console.log(this.results);    
       }
     }
   }
