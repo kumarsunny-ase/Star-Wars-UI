@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,11 +11,28 @@ import { ShowDetailsComponent } from './show-details/show-details.component';
 import { SearchHistoryComponent } from './search-history/search-history.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, ShowDetailsComponent, SearchHistoryComponent, SearchHistoryComponent, LoginComponent, SignupComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  declarations: [
+    AppComponent,
+    SearchComponent,
+    ShowDetailsComponent,
+    SearchHistoryComponent,
+    SearchHistoryComponent,
+    LoginComponent,
+    SignupComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgToastModule,
+  ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

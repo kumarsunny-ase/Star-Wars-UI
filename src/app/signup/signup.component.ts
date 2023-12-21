@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../Service/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  signUpForm!: FormGroup
+  signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private api : ApiService) {}
-
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -19,9 +23,8 @@ export class SignupComponent implements OnInit {
       lastName: ['', Validators.required],
       userName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
-
-    })
+      password: ['', Validators.required],
+    });
   }
 
   onSignUp() {
@@ -30,6 +33,7 @@ export class SignupComponent implements OnInit {
       this.api.signUp(this.signUpForm.value).subscribe({
         next: (response) => {
           alert(response.message);
+          this.router.navigate(['']);
         },
         error: (err) => {
           alert(err?.error.message);
@@ -39,5 +43,4 @@ export class SignupComponent implements OnInit {
       console.log('Form is not valid');
     }
   }
-
 }

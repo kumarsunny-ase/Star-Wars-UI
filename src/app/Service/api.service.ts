@@ -70,4 +70,16 @@ export class ApiService {
     const backendUrl = 'https://localhost:7118/register';
     return this.http.post<any>(`${backendUrl}`, userObj);
   }
+
+   storeToken(tokenValue: string){
+    localStorage.setItem('token', tokenValue);
+   }
+
+   getToken(){
+    return localStorage.getItem('token');
+   }
+
+   isLoggedIn(): boolean{
+    return !localStorage.getItem('token')
+   }
 }

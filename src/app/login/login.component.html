@@ -18,8 +18,8 @@
             <form action="#!" [formGroup]="loginForm">
               <div class="row gy-3 gy-md-4 overflow-hidden">
                 <div class="col-12">
-                  <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                  <input formControlName="username" type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                  <label for="email" class="form-label">Username <span class="text-danger">*</span></label>
+                  <input formControlName="username" type="username" class="form-control" name="username"  placeholder="name@example.com" required>
                 </div>
                 <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')" class="text-danger">Username is required</small>
                 <div class="col-12">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-12">
                   <div class="d-grid">
-                    <button (click)="onLogin()" class="btn bsb-btn-xl btn-primary" type="submit" routerLink="/login" [disabled]="loginForm.invalid">Log in now</button>
+                    <button (click)="onLogin()" class="btn bsb-btn-xl btn-primary" type="submit" routerLink="/login" [disabled]="loginForm.invalid">Log in </button>
                   </div>
                 </div>
               </div>
