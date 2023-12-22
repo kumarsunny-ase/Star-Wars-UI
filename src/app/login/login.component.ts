@@ -28,11 +28,9 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.api.login(this.loginForm.value).subscribe({
         next: (response) => {
           this.loginForm.reset();
-          // alert(response.message);
           this.api.storeToken(response.token);
           this.toast.success({
             detail: 'SUCCESS',
@@ -48,7 +46,7 @@ export class LoginComponent implements OnInit {
             detail: "ERROR",
             summary: "Something went wrong!",
             duration: 5000,
-          });       
+          });
           console.log(err)
         },
       });

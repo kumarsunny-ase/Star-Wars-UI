@@ -20,9 +20,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
    if(this.api.isLoggedIn()){
-    return true;
+    return true  
    }else{
-    this.toast.error({detail: "ERROR", summary: "Please Login First!"})
+    this.toast.error({detail: "ERROR", summary: "Please Login First!"});
     this.route.navigate(['login']);
     return false;
    }
