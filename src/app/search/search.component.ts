@@ -68,4 +68,8 @@ export class SearchComponent {
 
     console.log(JSON.stringify(results));
   }
+
+  Logout() {
+    this.apiService.signOut();
+  }
 }

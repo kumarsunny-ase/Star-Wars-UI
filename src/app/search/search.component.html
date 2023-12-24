@@ -104,7 +104,9 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="results.length === 0 && isSearchComplete"><h4>No results found!</h4></div>
+  <div *ngIf="results.length === 0 && isSearchComplete">
+    <h4>No results found!</h4>
+  </div>
 </div>
 <div *ngIf="results.length && results[0].title" class="mt-5 mx-auto w-50">
   <!-- <div *ngFor="let result of results">
@@ -120,8 +122,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let result of results">
-        <td>{{result.title}}</td>
-        <td>{{result.director}}</td>
+        <td>{{ result.title }}</td>
+        <td>{{ result.director }}</td>
       </tr>
     </tbody>
   </table>
@@ -129,3 +131,8 @@
 
 <app-search-history [resourceType]="resourceType"></app-search-history>
 <!-- </div> -->
+<div class="mt-5 mx-auto w-50">
+  <a (click)="Logout()" class="btn btn-info btn-lg">
+    <span class="glyphicon glyphicon-log-out"></span> Log out
+  </a>
+</div>

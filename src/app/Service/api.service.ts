@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = 'https://swapi.dev/api';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: Router) {}
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -81,5 +82,10 @@ export class ApiService {
 
    isLoggedIn(): boolean{
     return !!localStorage.getItem('token')
+   }
+
+   signOut(){
+    localStorage.clear();
+    this.route.navigate(['login'])
    }
 }
